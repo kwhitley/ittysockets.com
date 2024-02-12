@@ -1,0 +1,14 @@
+{
+  "name": "ittysockets.com",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "release": "release --push --nopublish --patch"
+  },
+  "devDependencies": {
+    "vitepress": "^1.0.0-rc.42",
+    "yarn-release": "^1.10.6"
+  }
+}
