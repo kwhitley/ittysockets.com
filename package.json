@@ -1,6 +1,6 @@
 {
   "name": "ittysockets.com",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build",

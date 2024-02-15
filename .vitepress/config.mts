@@ -8,8 +8,10 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      // { text: 'Examples', link: '/markdown-examples' }
     ],
+
+    logo: '/logo.svg',
 
     sidebar: [
       {
@@ -21,8 +23,13 @@ export default defineConfig({
       }
     ],
 
+    footer: {
+      // message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2024+ Itty Industries, llc.'
+    },
+
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/kwhitley/ittysockets.com' }
     ]
   }
 })

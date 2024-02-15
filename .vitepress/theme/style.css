@@ -8,7 +8,7 @@
  *
  * Each colors have exact same color scale system with 3 levels of solid
  * colors with different brightness, and 1 soft color.
- * 
+ *
  * - `XXX-1`: The most solid color used mainly for colored text. It must
  *   satisfy the contrast ratio against when used on top of `XXX-soft`.
  *
@@ -104,6 +104,9 @@
     #47caff 50%
   );
   --vp-home-hero-image-filter: blur(44px);
+
+
+  --vp-home-hero-name-color: #f0c;
 }
 
 @media (min-width: 640px) {

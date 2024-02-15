@@ -4,22 +4,27 @@ layout: home
 
 hero:
   name: "Itty Sockets"
-  text: "Realtime communication in 3 lines of code."
-  tagline: My great project tagline
-  actions:
+  text: "Realtime apps just got easy."
+  tagline: Send realtime messages without the hassle :)
+  <!-- actions:
     - theme: brand
       text: Markdown Examples
       link: /markdown-examples
     - theme: alt
       text: API Examples
-      link: /api-examples
+      link: /api-examples -->
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 🚀
+    title: Ship Faster.
+    details: Building robust realtime platforms is hard; just ask your dev team. Instead of rolling your own socket servers, just borrow ours and skip the setup!
+  - icon: 🤑
+    title: Spend Less.
+    details:  Decrease your spend on infrastructure and maintenance, not to mention the engineering talent to keep them running.
+  - icon: 🌏
+    title: Works Everywhere.
+    details:  Our realtime rooms open automatically near the apps calling them.  Anywhere in the world.
+  - icon: 📈
+    title: No Limits.
+    details: Need a few million socket servers?  No problem.  We scale infinitely. Now you can too.
 ---
-
