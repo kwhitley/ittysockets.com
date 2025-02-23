@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: "Itty Sockets"
+  name: "Itty Sockets <small id=version></small>"
   text: "Realtime, Simplified."
   tagline: No accounts needed.  Just start sending.
   <!-- actions:
@@ -31,7 +31,7 @@ features:
 
 ## Getting Started
 
-### 1. [Import the client](https://npmjs.com/package/itty-sockets)
+### 1. Import the tiny [client](https://npmjs.com/package/itty-sockets).
 ```ts
 import { connect } from 'itty-sockets' // ~400 bytes
 ```
@@ -55,9 +55,20 @@ const channel = connect('my-cool-channel', { echo: true })
   // send messages
   .send('hello world')
   .send([1,2,3])
-  .send({ foo: 'bar' })
+
+// keep sending...
+channel.send({ foo: 'bar' })
 
 // received: hello world
 // received: [1, 2, 3]
 // received: { foo: 'bar' }
 ```
+
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(async () => {
+  const version = await fetch('https://ittysockets.io/version').then(r => r.text())
+  document.getElementById('version').innerHTML = `v${version}`
+})
+</script>

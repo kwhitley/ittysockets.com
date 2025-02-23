@@ -141,18 +141,18 @@
 }
 
 .VPHome .VPFeatures + * {
-  margin: 5rem 4rem 3rem;
-  // padding-left: clamp(4rem, 50%, calc(50vw - 576px));
-  // padding-right: clamp(4rem, 50%, calc(50vw - 576px));
+  // margin: 5rem 4rem 3rem;
+  // // padding-left: clamp(4rem, 50%, calc(50vw - 576px));
+  // // padding-right: clamp(4rem, 50%, calc(50vw - 576px));
 
-  & > div {
-    max-width: 1152px;
-    margin: 0 auto;
+  // & > div {
+  //   max-width: 1152px;
+  //   margin: 0 auto;
 
-    & > * {
-      margin-bottom: 2rem;
-    }
-  }
+  //   & > * {
+  //     margin-bottom: 2rem;
+  //   }
+  // }
 
   h2 {
     font-size: 2.5rem;
@@ -179,13 +179,31 @@
   .language-ts {
     // background-color: red;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 1rem;
     background-color: var(--vp-c-brand-soft);
     border: 1px solid var(--vp-c-brand-2);
     // margin: 0 4rem;
 
-    pre {
+    pre, code {
       white-space: pre-wrap;
     }
   }
+}
+
+.version-wrapper {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.version-display {
+  display: inline-block;
+}
+
+.VPHero #version {
+  // color: red;
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.3;
+
+  -webkit-text-fill-color: var(--vp-c-text-1);
 }
