@@ -8,6 +8,7 @@
     "release": "release --push --nopublish --patch"
   },
   "devDependencies": {
+    "sass": "^1.85.0",
     "vitepress": "^1.0.0-rc.42",
     "yarn-release": "^1.10.6"
   }
