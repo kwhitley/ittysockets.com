@@ -10,9 +10,17 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       // { text: 'Examples', link: '/markdown-examples' }
     ],
-
-    logo: '/logo.svg',
-
+    // logo: '/logo.svg',
+    logo: '/itty-square.64.png',
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/kwhitley/itty-sockets' },
+      { icon: 'discord', link: 'https://discord.gg/MQcpj9SA4G' },
+      { icon: 'x', link: 'https://twitter.com/kevinrwhitley' },
+    ],
+    editLink: {
+      pattern: 'https://github.com/kwhitley/ittysockets.com/edit/main/:path',
+      text: 'Edit this page on GitHub',
+    },
     sidebar: [
       {
         text: 'Examples',
@@ -22,14 +30,11 @@ export default defineConfig({
         ]
       }
     ],
-
     footer: {
-      // message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2024+ Itty Industries, llc.'
+      copyright: 'Copyright © 2024+ Itty Industries, LLC.'
     },
-
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/kwhitley/ittysockets.com' }
-    ]
-  }
+  },
+  head: [
+    ['link', { rel: 'icon', href: '/itty-square.64.png' }],
+  ],
 })

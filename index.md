@@ -69,6 +69,7 @@ import { onMounted } from 'vue'
 
 onMounted(async () => {
   const version = await fetch('https://ittysockets.io/version').then(r => r.text())
+  console.log(`ittysockets.io @ v${version}`)
   document.getElementById('version').innerHTML = `v${version}`
 })
 </script>

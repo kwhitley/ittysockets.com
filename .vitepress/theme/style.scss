@@ -200,10 +200,18 @@
 }
 
 .VPHero #version {
-  // color: red;
   font-size: 1rem;
   font-weight: 500;
   opacity: 0.3;
+  position: absolute;
+  top: 0.9em;
+  opacity: 0;
 
   -webkit-text-fill-color: var(--vp-c-text-1);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+
+  &:not(:empty) {
+    opacity: 0.3;
+  }
 }
