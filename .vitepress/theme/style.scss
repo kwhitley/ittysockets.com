@@ -164,6 +164,14 @@
     font-size: 1.5rem;
     font-weight: 500;
     color: var(--vp-home-hero-name-color);
+
+    a {
+      text-decoration: dotted underline;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 }
 

@@ -31,7 +31,7 @@ features:
 
 ## Getting Started
 
-### 1. Import the client
+### 1. [Import the client](https://npmjs.com/package/itty-sockets)
 ```ts
 import { connect } from 'itty-sockets' // ~400 bytes
 ```
