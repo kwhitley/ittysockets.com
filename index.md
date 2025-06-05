@@ -62,16 +62,16 @@ channel.send({ foo: 'bar' })
 ...meanwhile, `User A` receives:
 
 ```ts
-// received: hello world
+// received: "hello world"
 // received: [1, 2, 3]
-// received: { foo: 'bar' }
+// received: { foo: "bar" }
 ```
 
 ### Don't want to import files?
 Want to use it in a browser?  Just paste the snippet below and use `connect()` normally.  You'll lose TypeScript support, but this tiny script is the entire client code!
 
 ```ts
-let connect=(e,s={})=>{let o,t=[],n=[],a=0,r={},c=()=>(o||(o=new WebSocket(`wss://ittysockets.io/r/${e??""}?${new URLSearchParams(s)}`),o.onopen=()=>{for(;t.length;)o?.send(t.shift());r.open?.(),a&&o?.close()},o.onmessage=(e,s=JSON.parse(e.data))=>{for(let e of n)e({...s,date:new Date(s.date)})},o.onclose=()=>(a=0,o=null,r.close?.())),l);const l=new Proxy(c,{get:(e,s)=>({open:c,close:()=>(1==o?.readyState?o.close():a=1,l),send:(e,s)=>(e=JSON.stringify(e),e=s?`@@${s}@@${e}`:e,1==o?.readyState?o.send(e)??l:(t.push(e),c())),push:(e,s)=>(a=1,l.send(e,s)),on:(e,s)=>(r[e]=s,"message"==e?(n.push(s),c()):l)}[s])});return l};
+let connect=(e,o={})=>{let s,t=[],n=0,r={},a=()=>(s||(s=new WebSocket(`wss://ittysockets.io/r/${e}?${new URLSearchParams(o)}`),s.onopen=()=>{for(;t.length;)s?.send(t.shift());for(let e of r.open??[])e();n&&s?.close()},s.onmessage=(e,o=JSON.parse(e.data))=>{for(let e of r[o.type??"message"]??[])e({...o,date:new Date(o.date)})},s.onclose=()=>{n=0,s=null;for(let e of r.close??[])e()}),l);const l=new Proxy(a,{get:(e,o)=>({open:a,close:()=>(1==s?.readyState?s.close():n=1,l),send:(e,o)=>(e=JSON.stringify(e),e=o?`@@${o}@@${e}`:e,1==s?.readyState?(s.send(e),l):(t.push(e),a())),push:(e,o)=>(n=1,l.send(e,o)),on:(e,o)=>((r[e]??=[]).push(o),a()),remove:(e,o,s=r[e],t=s?.indexOf(o)??-1)=>(~t&&s?.splice(t,1),a())}[o])});return l};
 ```
 
 ## Usage Tips
@@ -102,7 +102,7 @@ All unsent messages will be queued, the connection opened, and the messages deli
     // received: [1, 2, 3] at 8:22:15 PM
     ```
 
-1. *You can send messages or reply to a specific user, by passing a recipient `uid` along with the message payload:*
+1. *You can send private messages or reply to a specific user, by passing a recipient `uid` along with the message payload:*
     ```ts
     connect('my channel')
       .send([1, 2, 3], 'rMUuzH') // assumes rMUuzH is a valid uid in the channel
