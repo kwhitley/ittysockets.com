@@ -13,9 +13,10 @@ export default defineConfig({
     // logo: '/logo.svg',
     logo: '/itty-square.64.png',
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/kwhitley/itty-sockets' },
+      { icon: 'github', link: 'https://github.com/kwhitley/ittysockets.com' },
       { icon: 'discord', link: 'https://discord.gg/MQcpj9SA4G' },
-      { icon: 'x', link: 'https://twitter.com/kevinrwhitley' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/itty.dev' },
+      { icon: 'x', link: 'https://twitter.com/ittydev' },
     ],
     editLink: {
       pattern: 'https://github.com/kwhitley/ittysockets.com/edit/main/:path',
@@ -31,7 +32,7 @@ export default defineConfig({
       }
     ],
     footer: {
-      copyright: 'Copyright © 2024+ Itty Industries, LLC.'
+      copyright: 'Copyright © 2025+ Itty'
     },
   },
   head: [

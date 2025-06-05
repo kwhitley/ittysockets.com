@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "sass": "^1.85.0",
-    "vitepress": "2.0.0-alpha.2",
+    "vitepress": "^1.6.3",
     "yarn-release": "^1.10.6"
   }
 }
