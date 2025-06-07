@@ -11,5 +11,8 @@
     "sass": "^1.85.0",
     "vitepress": "^1.6.3",
     "yarn-release": "^1.10.6"
+  },
+  "dependencies": {
+    "itty-sockets": "^0.3.5"
   }
 }

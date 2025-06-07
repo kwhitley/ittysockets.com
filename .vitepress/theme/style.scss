@@ -215,3 +215,50 @@
     opacity: 0.7;
   }
 }
+
+#watching {
+  position: fixed;
+  width: 50rem;
+  left: 0;
+  right: 3rem;
+  z-index: 1000;
+  margin: 0 auto;
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+
+  text-align: center;
+  top: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  &:has(#watching-count:not(:empty)) {
+    opacity: 1;
+  }
+}
+
+#watching-count {
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+
+  &:before {
+    content: 'are';
+    font-size: 1rem;
+  }
+
+  &:after {
+    content: 'viewers';
+    font-size: 1rem;
+  }
+
+  &.singular {
+    &:before {
+      content: 'is';
+    }
+
+    &:after {
+      content: 'viewer';
+    }
+  }
+}

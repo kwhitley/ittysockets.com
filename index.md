@@ -30,6 +30,7 @@ features:
 ---
 
 ## Getting Started
+<a href="#viewer-count-demo" id="watching">There <span id="watching-count"></span> on this page.</a>
 
 ### 1. Import the tiny [client](https://npmjs.com/package/itty-sockets).
 ```ts
@@ -110,19 +111,51 @@ All unsent messages will be queued, the connection opened, and the messages deli
 
 1. *I include a bit of rate-limiting to prevent traffic that might impact the service for others.* If you flood the connection with messages, you'll be kicked from the server and blocked for a period of time.  Can it handle mousemove events and such?  Sure, but even then, you might want to throttle/debounce your own traffic to be kinder on the server and avoid a potential block.
 
-
 ### Like using it?
 I don't want a dime, but a little motivation/flattery goes a long way! Consider giving me a shout-out:
   - [@kevinrwhitley](https://x.com/kevinrwhitley) on [X](https://x.com)
   - [@ittydev](https://x.com/ittydev) on [X](https://x.com)
   - [@ittydev](https://bsky.app/profile/itty.dev) on [BlueSky](https://bsky.app)
 
-<script setup>
-import { onMounted } from 'vue'
 
-onMounted(async () => {
-  const version = await fetch('https://ittysockets.io/version').then(r => r.text())
-  console.log(`ittysockets.io @ v${version}`)
-  document.getElementById('version').innerHTML = `v${version}`
-})
+## Viewer Count Demo
+The realtime viewer count on this page is powered by itty-sockets.  Here's how it works:
+```ts
+// get the element to update
+const watching = document.getElementById('watching-count')
+
+// set the count when a new user joins or leaves
+const setWatching = ({ users }) => {
+  watching.innerHTML = users
+  watching.className = users > 1 ? 'plural' : 'singular'
+}
+
+// connect to the channel and set the count when a new user joins or leaves
+const channel = connect('watching/' + window.location.pathname)
+  .on('join', setWatching)
+  .on('leave', setWatching)
+```
+
+<script setup>
+  import { onMounted } from 'vue'
+  import { connect } from 'itty-sockets'
+
+  onMounted(async () => {
+    const version = await fetch('https://ittysockets.io/version').then(r => r.text())
+    console.log(`ittysockets.io @ v${version}`)
+    document.getElementById('version').innerHTML = `v${version}`
+
+    const watching = document.getElementById('watching-count')
+
+    const setWatching = ({ users }) => {
+      watching.innerHTML = users
+      watching.className = users > 1 ? 'plural' : 'singular'
+    }
+
+    const channel = connect('watching/' + window.location.pathname)
+      .on('join', setWatching)
+      .on('leave', setWatching)
+
+    return () => channel.close()
+  })
 </script>
