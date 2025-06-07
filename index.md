@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "Itty Sockets <small id=version></small>"
   text: "Realtime, Simplified."
-  tagline: No accounts needed.  Just start sending.
+  tagline: No accounts needed.  Just start sending.<a href="#viewer-count-demo" id="watching">There <span id="watching-count"></span> on this page. *</a>
   <!-- actions:
     - theme: brand
       text: Markdown Examples
@@ -30,7 +30,6 @@ features:
 ---
 
 ## Getting Started
-<a href="#viewer-count-demo" id="watching">There <span id="watching-count"></span> on this page.</a>
 
 ### 1. Import the tiny [client](https://npmjs.com/package/itty-sockets).
 ```ts
