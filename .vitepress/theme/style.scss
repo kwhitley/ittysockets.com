@@ -239,14 +239,13 @@
     right: 0;
     position: static;
     margin-top: 0.3rem;
-    display: inline-block;
+    display: flex;
 
-    &:before {
-      @media (max-width: 600px) {
+    @media (max-width: 600px) {
+      &:before {
         display: none;
       }
     }
-
   }
 
   text-align: center;
