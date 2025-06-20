@@ -25,7 +25,7 @@ features:
     details:  These channels are as private as the channel name you pick.  Plus, I log nothing, track nothing, and store nothing. That's easier for me, and safer for you.
   - icon: 😶‍🌫️
     title: Tiny.
-    details:  The entire client code is just 450 bytes.  It almost fits in a tweet!  This means it's easy to include anywhere you need it, even in the browser.
+    details:  The entire client code is just 490 bytes. This means it's easy to include anywhere you need it, even in the browser.
 
 ---
 
@@ -33,7 +33,7 @@ features:
 
 ### 1. Import the tiny [client](https://npmjs.com/package/itty-sockets).
 ```ts
-import { connect } from 'itty-sockets' // ~422 bytes
+import { connect } from 'itty-sockets' // ~490 bytes
 ```
 
 ### 2. Connect to a channel and use it.
@@ -71,7 +71,7 @@ channel.send({ foo: 'bar' })
 Want to use it in a browser?  Just paste the snippet below and use `connect()` normally.  You'll lose TypeScript support, but this tiny script is the entire client code!
 
 ```ts
-let connect=(e,o={})=>{let s,t=[],n=0,r={},a=()=>(s||(s=new WebSocket(`wss://ittysockets.io/r/${e}?${new URLSearchParams(o)}`),s.onopen=()=>{for(;t.length;)s?.send(t.shift());for(let e of r.open??[])e();n&&s?.close()},s.onmessage=(e,o=JSON.parse(e.data))=>{for(let e of r[o.type??"message"]??[])e({...o,date:new Date(o.date)})},s.onclose=()=>{n=0,s=null;for(let e of r.close??[])e()}),l);const l=new Proxy(a,{get:(e,o)=>({open:a,close:()=>(1==s?.readyState?s.close():n=1,l),send:(e,o)=>(e=JSON.stringify(e),e=o?`@@${o}@@${e}`:e,1==s?.readyState?(s.send(e),l):(t.push(e),a())),push:(e,o)=>(n=1,l.send(e,o)),on:(e,o)=>((r[e]??=[]).push(o),a()),remove:(e,o,s=r[e],t=s?.indexOf(o)??-1)=>(~t&&s?.splice(t,1),a())}[o])});return l};
+let connect=(e,s={})=>{let o,t=0,n=[],a={},r=()=>(o||(o=new WebSocket(/^wss?:/.test(e)?e:"wss://ittysockets.io/c/"+e+"?"+new URLSearchParams(s)),o.onclose=()=>{t=0,o=null;for(let e of a.close??[])e()},o.onopen=()=>{for(;n.length;)o?.send(n.shift());for(let e of a.open??[])e();t&&o?.close()},o.onmessage=(e,s=JSON.parse(e.data))=>{for(let e of a[s.type??"message"]??[])e({...s,date:new Date(s.date)})}),l);const l=new Proxy(r,{get:(e,s)=>({close:()=>(1==o?.readyState?o.close():t=1,l),open:r,send:(e,s)=>(e=JSON.stringify(e),e=s?"@@"+s+"@@"+e:e,1==o?.readyState?(o.send(e),l):(n.push(e),r())),push:(e,s)=>(t=1,l.send(e,s)),on:(e,s)=>((a[e]??=[]).push(s),r()),remove:(e,s,o=a[e],t=o?.indexOf(s)??-1)=>(~t&&o?.splice(t,1),r())}[s])});return l};
 ```
 
 ## Usage Tips
