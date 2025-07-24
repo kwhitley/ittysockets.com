@@ -5,7 +5,7 @@ layout: home
 hero:
   name: "Itty Sockets <small id=version></small>"
   text: "Realtime, Simplified."
-  tagline: No accounts needed.  Just start sending.<a href="#viewer-count-demo" id="watching">There <span id="watching-count"></span> on this page. *</a>
+  tagline: No accounts, no API keys.  Just start sending.<a href="#viewer-count-demo" id="watching">There <span id="watching-count"></span> on this page. *</a>
   <!-- actions:
     - theme: brand
       text: Markdown Examples
@@ -15,17 +15,22 @@ hero:
       link: /api-examples -->
 features:
   - icon: 🚀
-    title: Simple.
-    details: Building realtime features is hard.  I wanted to make it easy <i>(mostly for myself)</i>.<br /><br /> Like... really easy.
+    title: Dead-Simple.
+    details: I <i>hate</i> boilerplate. In fact, I hate steps in general.
+      <br /><br />As such, I made this to solve my own <strike>laziness</strike> needs.
   - icon: 💪🏼
-    title: Powerful.
-    details:  I provide the communication layer, but leave the rest to you.  Your payloads can be anything you want.
+    title: Flexible.
+    details:  I provide the communication layer, but leave the rest to you.
+      <br /><br />Your messages can be anything you want.*
+      <br /><br /><span class="footnote">* As long as it's JSON serializable.</span>
   - icon: 😎
     title: Private.
-    details:  These channels are as private as the channel name you pick.  Plus, I log nothing, track nothing, and store nothing. That's easier for me, and safer for you.
+    details:  These channels are as private as the channel name you pick.  I log nothing, track nothing, and store nothing.
+      </br /><br />Want something even more secure? Encrypt your payloads!
   - icon: 😶‍🌫️
     title: Tiny.
-    details:  The entire client code is just 490 bytes. This means it's easy to include anywhere you need it, even in the browser.
+    details:  The entire client code is around 500 bytes.
+      <br /><br />Most don't care about this sort of thing, but I [obviously] obssess about it.
 
 ---
 
@@ -72,6 +77,17 @@ Want to use it in a browser?  Just paste the snippet below and use `connect()` n
 
 ```ts
 let connect=(e,s={})=>{let o,t=0,n=[],a={},r=()=>(o||(o=new WebSocket(/^wss?:/.test(e)?e:"wss://ittysockets.io/c/"+e+"?"+new URLSearchParams(s)),o.onclose=()=>{t=0,o=null;for(let e of a.close??[])e()},o.onopen=()=>{for(;n.length;)o?.send(n.shift());for(let e of a.open??[])e();t&&o?.close()},o.onmessage=(e,s=JSON.parse(e.data))=>{for(let e of a[s.type??"message"]??[])e({...s,date:new Date(s.date)})}),l);const l=new Proxy(r,{get:(e,s)=>({close:()=>(1==o?.readyState?o.close():t=1,l),open:r,send:(e,s)=>(e=JSON.stringify(e),e=s?"@@"+s+"@@"+e:e,1==o?.readyState?(o.send(e),l):(n.push(e),r())),push:(e,s)=>(t=1,l.send(e,s)),on:(e,s)=>((a[e]??=[]).push(s),r()),remove:(e,s,o=a[e],t=o?.indexOf(s)??-1)=>(~t&&o?.splice(t,1),r())}[s])});return l};
+```
+
+### Does itty-sockets (client) work on any WebSocket server?
+As long as it serves/accepts JSON, yes!  You lose a few niceties like `join` and `leave` messages, but you still get a tiny client that handles race conditions, auto parses, etc.
+
+```ts
+const ws = connect('wss://randomserver.com')
+             .on('message', console.log)  // parsed
+             .send({ foo: 'bar' })        // can send immediately
+
+setInterval(ws.open, 1000)                // auto-reconnect every 1s
 ```
 
 ## Usage Tips
