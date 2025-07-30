@@ -30,7 +30,7 @@ features:
   - icon: 😶‍🌫️
     title: Tiny.
     details:  The entire client code is around 500 bytes.
-      <br /><br />Most don't care about this sort of thing, but I [obviously] obssess about it.
+      <br /><br />Most don't care about this sort of thing, but I [obviously] obsess about it.
 
 ---
 
@@ -76,7 +76,7 @@ channel.send({ foo: 'bar' })
 Want to use it in a browser?  Just paste the snippet below and use `connect()` normally.  You'll lose TypeScript support, but this tiny script is the entire client code!
 
 ```ts
-let connect=(e,s={})=>{let o,t=0,n=[],a={},r=()=>(o||(o=new WebSocket(/^wss?:/.test(e)?e:"wss://ittysockets.io/c/"+e+"?"+new URLSearchParams(s)),o.onclose=()=>{t=0,o=null;for(let e of a.close??[])e()},o.onopen=()=>{for(;n.length;)o?.send(n.shift());for(let e of a.open??[])e();t&&o?.close()},o.onmessage=(e,s=JSON.parse(e.data))=>{for(let e of a[s.type??"message"]??[])e({...s,date:new Date(s.date)})}),l);const l=new Proxy(r,{get:(e,s)=>({close:()=>(1==o?.readyState?o.close():t=1,l),open:r,send:(e,s)=>(e=JSON.stringify(e),e=s?"@@"+s+"@@"+e:e,1==o?.readyState?(o.send(e),l):(n.push(e),r())),push:(e,s)=>(t=1,l.send(e,s)),on:(e,s)=>((a[e]??=[]).push(s),r()),remove:(e,s,o=a[e],t=o?.indexOf(s)??-1)=>(~t&&o?.splice(t,1),r())}[s])});return l};
+let connect=(e,s={})=>{let t,a=0,n=[],p=[],o={},l=()=>(t||(t=new WebSocket((/^wss?:/.test(e)?e:"wss://ittysockets.io/c/"+e)+"?"+new URLSearchParams(s)),t.onmessage=(e,s=JSON.parse(e.data),t=s?.message,a={...null==t?.[0]&&t,...s,...s.date&&{date:new Date(s.date)}})=>{o[s?.type??t?.type]?.map(e=>e(a)),s?.type||o.message?.map(e=>e(a)),p.map(([e,s])=>e(a)&&s(a))},t.onopen=()=>(n.splice(0).map(e=>t?.send(e)),o.open?.map(e=>e()),a&&t?.close()),t.onclose=()=>(a=0,t=null,o.close?.map(e=>e()))),c),c=new Proxy(l,{get:(e,s)=>({open:l,close:()=>(1==t?.readyState?t.close():a=1,c),push:(e,s)=>(a=1,c.send(e,s)),send:(e,s)=>(e=JSON.stringify(e),e=s?"@@"+s+"@@"+e:e,1==t?.readyState?(t.send(e),c):(n.push(e),l())),on:(e,s)=>(s&&(e?.[0]?(o[e]??=[]).push(s):p.push([e,s])),l()),remove:(e,s,t=o[e],a=t?.indexOf(s)??-1)=>(~a&&t?.splice(a,1),l())}[s])});return c};
 ```
 
 ### Does itty-sockets (client) work on any WebSocket server?
