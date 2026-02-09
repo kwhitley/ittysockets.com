@@ -38,7 +38,7 @@ features:
 
 ### 1. Import the tiny [client](https://npmjs.com/package/itty-sockets).
 ```ts
-import { connect } from 'itty-sockets' // ~490 bytes
+import { connect } from 'itty-sockets' // ~466 bytes
 ```
 
 ### 2. Connect to a channel and use it.
@@ -46,10 +46,11 @@ import { connect } from 'itty-sockets' // ~490 bytes
 No stringifying, parsing, or extra steps required.
 
 #### `User A` connects to a channel and listens:
+
 ```ts
 connect('my-cool-channel')
-  .on('message',
-    (e) => console.log('received:', e.message)
+  .on('message', ({ message }) =>
+    console.log('received:', message)
   )
 ```
 
@@ -72,14 +73,30 @@ channel.send({ foo: 'bar' })
 // received: { foo: "bar" }
 ```
 
+### Optional
+This library includes handy message-routing based on either `message.type` or even a custom filter function. Using `.on('message', handler)` will catch *any* message, but using custom types/filters allows you to route easily between *different types of messages*.
+
+```ts
+// SENDER
+channel.send({ type: 'myChat', content: 'hey there', isPetOwner: true })
+
+// RECEIVER
+channel
+  .on('myChat', ({ content }) => {
+    // do something with content
+  })
+  .on((e: MessageEvent) => e.is)
+
+```
+
 ### Don't want to import files?
 Want to use it in a browser?  Just paste the snippet below and use `connect()` normally.  You'll lose TypeScript support, but this is all the code you need!
 
 ```ts
-let connect=(e,s={})=>{let t,a=0,n=[],p=[],o={},l=()=>(t||(t=new WebSocket((/^wss?:/.test(e)?e:"wss://ittysockets.io/c/"+e)+"?"+new URLSearchParams(s)),t.onmessage=(e,s=JSON.parse(e.data),t=s?.message,a={...null==t?.[0]&&t,...s,...s.date&&{date:new Date(s.date)}})=>{o[s?.type??t?.type]?.map(e=>e(a)),s?.type||o.message?.map(e=>e(a)),p.map(([e,s])=>e(a)&&s(a))},t.onopen=()=>(n.splice(0).map(e=>t?.send(e)),o.open?.map(e=>e()),a&&t?.close()),t.onclose=()=>(a=0,t=null,o.close?.map(e=>e()))),c),c=new Proxy(l,{get:(e,s)=>({open:l,close:()=>(1==t?.readyState?t.close():a=1,c),push:(e,s)=>(a=1,c.send(e,s)),send:(e,s)=>(e=JSON.stringify(e),e=s?"@@"+s+"@@"+e:e,1==t?.readyState?(t.send(e),c):(n.push(e),l())),on:(e,s)=>(s&&(e?.[0]?(o[e]??=[]).push(s):p.push([e,s])),l()),remove:(e,s,t=o[e],a=t?.indexOf(s)??-1)=>(~a&&t?.splice(a,1),l())}[s])});return c};
+let connect=(e,s={})=>{let a,t,n=[],p={},o=()=>(a||(a=new WebSocket((/^wss?:/.test(e)?e:"wss://itty.ws/c/"+e)+"?"+new URLSearchParams(s)),a.onmessage=(e,s=JSON.parse(e.data),a=s?.message,t={...null==a?.[0]&&a,...s})=>[t.type,s.type?0:"message","*"].map(e=>p[e]?.map(e=>e(t))),a.onopen=()=>(n.splice(0).map(e=>a.send(e)),p.open?.map(e=>e(t)),t&&a?.close()),a.onclose=()=>(t=a=null,p.close?.map(e=>e(t)))),l),l={open:o,send:(e,s)=>(e=(s?`${s}`:"")+JSON.stringify(e),1&a?.readyState?a.send(e):n.push(e),o()),on:(e,s)=>((p[e?.[0]?e:"*"]??=[]).push(e?.[0]?s:a=>e?.(a)&&s(a)),o()),remove:(e,s)=>(p[e]=p[e]?.filter(e=>e!=s),l),close:()=>(1&a?.readyState?a.close():t=1,l),push:(e,s)=>(t=1,l.send(e,s))};return l};
 ```
 
-### Does itty-sockets (client) work on any WebSocket server?
+### Does itty-sockets (client) work on *any* WebSocket server?
 As long as it serves/accepts JSON, yes!  You lose a few niceties like `join` and `leave` messages, but you still get a tiny client that handles race conditions, auto parses, etc.
 
 ```ts
@@ -99,7 +116,7 @@ All unsent messages will be queued, the connection opened, and the messages deli
 
     ```ts
     type MessageEvent = {
-      date: Date,       // actual Date object of original message
+      date: number,     // UNIX timestamp of original message
       id: String,       // unique message ID
       uid: String,      // unique user ID of the sending connection
       alias?: String    // optional alias if the user connected with one
