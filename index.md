@@ -29,7 +29,7 @@ features:
       </br /><br />Want something even more secure? Encrypt your payloads!
   - icon: 😶‍🌫️
     title: Tiny.
-    details:  The entire client code is around 500 bytes.
+    details:  The entire client code is under 500 bytes.
       <br /><br />Most don't care about this sort of thing, but I [obviously] obsess about it.
 
 ---
