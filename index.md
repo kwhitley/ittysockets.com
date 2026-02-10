@@ -17,7 +17,7 @@ features:
   - icon: 🚀
     title: Dead-Simple.
     details: I <i>hate</i> boilerplate. In fact, I hate steps in general.
-      <br /><br />As such, I made this to solve my own <strike>laziness</strike> needs.
+      <br /><br />I figure that's a pretty safe DX target to optimize for...
   - icon: 💪🏼
     title: Flexible.
     details:  I provide the communication layer, but leave the rest to you.
@@ -29,8 +29,8 @@ features:
       </br /><br />Want something even more secure? Encrypt your payloads!
   - icon: 😶‍🌫️
     title: Tiny.
-    details:  The entire client code is under 500 bytes.
-      <br /><br />Most don't care about this sort of thing, but I [obviously] obsess about it.
+    details:  The entire client code is well under 500 bytes.
+      <br /><br />Because <i>powerful</i> code doesn't need to be <i>big</i> code.
 
 ---
 
